@@ -1,17 +1,19 @@
 class Solution {
 public:
 
-    int robhelper(vector<int>& nums,int i)
+    int robhelper(vector<int>& nums,int ind,vector<int>&dp)
     {
-        if(i>=nums.size())
-        {
-            return 0;
-        }
-        int rob1=nums[i]+robhelper(nums,i+2);
-        int rob2= 0 + robhelper(nums,i+1);
-        return max(rob1,rob2);
+       if(ind==0)return nums[ind];
+       if(ind<0)return 0;
+       if(dp[ind]!=-1)return dp[ind];
+
+        int rob1=nums[ind]+robhelper(nums,ind-2,dp);
+        int rob2= 0 + robhelper(nums,ind-1,dp);
+        return dp[ind]= max(rob1,rob2);
     }
     int rob(vector<int>& nums) {
-        return robhelper(nums,0);
+        int n=nums.size();
+        vector<int>dp(n,-1);
+        return robhelper(nums,n-1,dp);
     }
 };
