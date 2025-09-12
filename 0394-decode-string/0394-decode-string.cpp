@@ -3,38 +3,40 @@ public:
     string decodeString(string s) {
         stack<string>st;
         stack<int>num;
-       
+        int k=0;
         string curr="";
-         int k=0;
-        for(char c:s)
+
+        for(auto ch:s)
         {
-            if(isdigit(c))
+            if(isdigit(ch))
             {
-                k=k*10+(c-'0');
+                k=k*10+(ch-'0');
             }
-            else if(c=='[')
+            else if(ch=='[')
             {
                 num.push(k);
                 st.push(curr);
                 k=0;
                 curr="";
             }
-            else if(c==']')
-            {   int repeat=num.top();
-                 num.pop();
+            else if(ch==']')
+            {
+                int repeat=num.top();
+                num.pop();
                 string prev=st.top();
                 st.pop();
-                while(repeat--)
+                string expand="";
+                for(int i=0;i<repeat;i++)
                 {
-                    prev+=curr;
+                    expand+=curr;
                 }
-                curr=prev;
+                curr=prev+expand;
             }
-            else
-            {
-                curr+=c;
+            else{
+                curr+=ch;
             }
         }
         return curr;
+
     }
 };
