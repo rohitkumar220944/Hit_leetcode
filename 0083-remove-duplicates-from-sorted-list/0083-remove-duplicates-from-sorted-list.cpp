@@ -15,7 +15,7 @@ public:
         while(temp!=NULL)
         {
            
-            while(temp->next&&temp->val==temp->next->val)
+            while(temp->next!=nullptr && temp->val==temp->next->val)
             
                temp->next=temp->next->next;
                 temp=temp->next;
